@@ -20,6 +20,7 @@
     "promise-mysql": "^3.0.2",
     "request": "^2.81.0",
     "request-promise": "^4.2.1",
-    "serve-favicon": "^2.3.2"
+    "serve-favicon": "^2.3.2",
+    "string-to-json": "^0.1.0"
   }
 }

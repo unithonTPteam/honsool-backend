@@ -10,6 +10,7 @@ const apiKey = require('../config/apiKey.js').apiKey;
 const clovaKey = require('../config/clovaKey.js');
 const request = require('request');
 const rp = require('request-promise');
+const str2json = require('string-to-json');
 const storage = multer.diskStorage({
   destination:'./public/images',
   filename: function (req, file, cb) {
@@ -48,21 +49,19 @@ router.post('/', upload.single('image'), async(req, res)=>{
   //clova
   rp(options)
     .then(function (parsedBody) {
-      console.log('success: ', parsedBody);
 
+      let body = JSON.parse(parsedBody);
+      console.log('success: ', body.faces[0].emotion);
       //얼굴 사진 올린 경우
-      if(parsedBody.faces.length != 0){
-<<<<<<< HEAD
+      if(body.info.faceCount != 0){
         let feeling, gender, timing, age;
-        feeling = parsedBody.faces[0].emotion.value;
-        gender = parsedBody.faces[0].gender.value;
-        age = parsedBody.faces[0].age.value.match('/(\d{1,2})(-(\d{1,2}))?/')[1];
-=======
-        hour = new Date().getHours();
-        if ()
-        const bestBeer = beer({});
->>>>>>> 81517bc9e29cfcdce7970c966dee3d41b9e31c03
+        feeling = body.faces[0].emotion.value;
+        gender = body.faces[0].gender.value;
+        age = body.faces[0].age.value.split('~')[0];
+        timing = new Date().getHours();
 
+        const bestBeer = beer({feeling, gender, timing, age});
+        console.log(bestBeer);
       }else{  //맥주사진 올린 경우
         //custom vison (맥주 브랜드 인식 -> 병맛, )
         rp(options2)
