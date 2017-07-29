@@ -21,7 +21,7 @@ const upload = multer({storage:storage});
 const fs = require('fs');
 const beer = require('./../lib/beer');
 const music = require('./../lib/music');
-
+const beers = require('./../resources/beers');
 router.post('/', upload.single('image'), async(req, res)=>{
   console.log(req.file);
   // var url = 'https://s3.ap-northeast-2.amazonaws.com/unithon-5th-3rd/20140806001762_0.jpg';
@@ -55,7 +55,7 @@ router.post('/', upload.single('image'), async(req, res)=>{
         const bestBeer = beer({feeling, gender, timing, age});
         console.log(bestBeer);
         const bestMusic = music({feeling});
-        let ret ={ beer:bestBeer, musics:bestMusic};
+        let ret ={ message:'face', beer:bestBeer, musics:bestMusic};
         res.status(200).json(ret);
       }else{  //맥주사진 올린 경우
         //custom vison (맥주 브랜드 인식 -> 병맛, )
@@ -75,8 +75,13 @@ router.post('/', upload.single('image'), async(req, res)=>{
             rp(options2)
               .then(function (pb) {
                    let body = JSON.parse(pb);
-                   console.log(body);
-                   let ret = {musics:music({})}
+
+                   console.log(body.Predictions[0].Tag);
+                   let ret = {
+                     message:'beer',
+                     beer:beers[body.Predictions[0].Tag],
+                     musics:music({})
+                   };
                    res.status(200).json(ret);
               })
               .catch(function (error) {
@@ -89,7 +94,7 @@ router.post('/', upload.single('image'), async(req, res)=>{
     })
     .catch(function (err) {
       console.log('naver clova err: ', err);
-      res.status(500).send({message:"err"});
+      res.status(500).send({message:"clova err"});
     });
 
 });
