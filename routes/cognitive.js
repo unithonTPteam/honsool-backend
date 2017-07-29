@@ -20,6 +20,7 @@ const storage = multer.diskStorage({
 const upload = multer({storage:storage});
 const fs = require('fs');
 const beer = require('./../lib/beer');
+const music = require('./../lib/music');
 
 router.post('/', upload.single('image'), async(req, res)=>{
   console.log(req.file);
@@ -53,8 +54,9 @@ router.post('/', upload.single('image'), async(req, res)=>{
 
         const bestBeer = beer({feeling, gender, timing, age});
         console.log(bestBeer);
-        let ret = bestBeer;
-        res.status(200).send({message:ret});
+        const bestMusic = music({feeling});
+        let ret ={ beer:bestBeer, musics:bestMusic};
+        res.status(200).json(ret);
       }else{  //맥주사진 올린 경우
         //custom vison (맥주 브랜드 인식 -> 병맛, )
 
@@ -74,15 +76,16 @@ router.post('/', upload.single('image'), async(req, res)=>{
               .then(function (pb) {
                    let body = JSON.parse(pb);
                    console.log(body);
-
+                   let ret = {musics:music({})}
+                   res.status(200).json(ret);
               })
               .catch(function (error) {
                   console.log('custom vision err: ', error);
+                  res.status(500).send({message:'custom vision err'});
               });
           });
       }
 
-      res.status(200).send({message:"status ok"})
     })
     .catch(function (err) {
       console.log('naver clova err: ', err);
