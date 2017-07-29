@@ -23,7 +23,6 @@ const beer = require('./../lib/beer');
 const music = require('./../lib/music');
 const beers = require('./../resources/beers');
 router.post('/', upload.single('image'), async(req, res)=>{
-  console.log(req.file);
   // var url = 'https://s3.ap-northeast-2.amazonaws.com/unithon-5th-3rd/20140806001762_0.jpg';
   var url =  'https://s3.ap-northeast-2.amazonaws.com/unithon-5th-3rd/2015032403230_0.jpg';
 //clova options
@@ -55,6 +54,7 @@ router.post('/', upload.single('image'), async(req, res)=>{
         const bestBeer = beer({feeling, gender, timing, age});
         console.log(bestBeer);
         const bestMusic = music({feeling});
+        bestBeer.emotion=emotion;
         let ret ={ message:'face', beer:bestBeer, musics:bestMusic};
         res.status(200).json(ret);
       }else{  //맥주사진 올린 경우
@@ -76,10 +76,10 @@ router.post('/', upload.single('image'), async(req, res)=>{
               .then(function (pb) {
                    let body = JSON.parse(pb);
 
-                   console.log(body.Predictions[0].Tag);
+                   console.log(body.Predictions[1].Tag);
                    let ret = {
                      message:'beer',
-                     beer:beers[body.Predictions[0].Tag],
+                     beer:beers[body.Predictions[1].Tag],
                      musics:music({})
                    };
                    res.status(200).json(ret);
