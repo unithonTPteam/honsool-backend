@@ -18,6 +18,7 @@ const storage = multer.diskStorage({
 });
 const upload = multer({storage:storage});
 const fs = require('fs');
+const beer = require('./../lib/beer');
 
 router.post('/', upload.single('image'), async(req, res)=>{
   // var url = 'https://s3.ap-northeast-2.amazonaws.com/unithon-5th-3rd/20140806001762_0.jpg';
@@ -51,10 +52,16 @@ router.post('/', upload.single('image'), async(req, res)=>{
 
       //얼굴 사진 올린 경우
       if(parsedBody.faces.length != 0){
+<<<<<<< HEAD
         let feeling, gender, timing, age;
         feeling = parsedBody.faces[0].emotion.value;
         gender = parsedBody.faces[0].gender.value;
         age = parsedBody.faces[0].age.value.match('/(\d{1,2})(-(\d{1,2}))?/')[1];
+=======
+        hour = new Date().getHours();
+        if ()
+        const bestBeer = beer({});
+>>>>>>> 81517bc9e29cfcdce7970c966dee3d41b9e31c03
 
       }else{  //맥주사진 올린 경우
         //custom vison (맥주 브랜드 인식 -> 병맛, )
