@@ -22,7 +22,7 @@ app.set('port', port);
 
 var server = http.createServer(app);
 
-IO(server, {origins: '*:*'});
+IO(server);
 
 /**
  * Listen on provided port, on all network interfaces.

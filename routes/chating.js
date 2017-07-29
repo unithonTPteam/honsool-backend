@@ -8,10 +8,10 @@ module.exports = (server) => {
     io.on('connection', function(socket) {
         console.log('connected');
 
-        socket.on('join', (params) => {
+        socket.on('postChat', (params) => {
             console.log('message : ' + params);
             //console.log(socket);
-            io.emit('join', 'sosososososoos');
+            io.emit('getChat', params);
         });
     });
 }
