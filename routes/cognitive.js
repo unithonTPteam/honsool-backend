@@ -63,9 +63,11 @@ router.post('/', upload.single('image'), async(req, res)=>{
           });
       }
 
+      res.status(200).send({message:"status ok"})
     })
     .catch(function (err) {
       console.log('naver clova err: ', err);
+      res.status(500).send({message:"err"});
     });
 
 });
