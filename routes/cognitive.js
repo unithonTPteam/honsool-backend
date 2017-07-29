@@ -54,7 +54,7 @@ router.post('/', upload.single('image'), async(req, res)=>{
         const bestBeer = beer({feeling, gender, timing, age});
         console.log(bestBeer);
         const bestMusic = music({feeling});
-        bestBeer.emotion=emotion;
+        bestBeer.emotion=feeling;
         let ret ={ message:'face', beer:bestBeer, musics:bestMusic};
         res.status(200).json(ret);
       }else{  //맥주사진 올린 경우
