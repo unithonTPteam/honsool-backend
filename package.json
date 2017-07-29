@@ -6,10 +6,10 @@
     "start": "node ./bin/www"
   },
   "dependencies": {
-    "socket.io": "^2.0.3"
     "aws-sdk": "^2.92.0",
     "body-parser": "^1.16.1",
     "cookie-parser": "^1.4.3",
+    "cors": "^2.8.4",
     "debug": "^2.6.8",
     "express": "^4.14.1",
     "jade": "^1.11.0",
@@ -22,6 +22,7 @@
     "request": "^2.81.0",
     "request-promise": "^4.2.1",
     "serve-favicon": "^2.3.2",
+    "socket.io": "^2.0.3",
     "string-to-json": "^0.1.0"
   }
 }
