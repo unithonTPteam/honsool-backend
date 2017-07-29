@@ -6,6 +6,7 @@
     "start": "node ./bin/www"
   },
   "dependencies": {
+    "socket.io": "^2.0.3"
     "aws-sdk": "^2.92.0",
     "body-parser": "^1.16.1",
     "cookie-parser": "^1.4.3",
