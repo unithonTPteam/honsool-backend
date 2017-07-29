@@ -9,7 +9,11 @@ var index = require('./routes/index');
 var users = require('./routes/users');
 var cognitive = require('./routes/cognitive');
 
+
 var app = express();
+
+//var IO = require('socket.io').listen(server);
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
