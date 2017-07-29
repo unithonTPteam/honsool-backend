@@ -51,6 +51,10 @@ router.post('/', upload.single('image'), async(req, res)=>{
 
       //얼굴 사진 올린 경우
       if(parsedBody.faces.length != 0){
+        let feeling, gender, timing, age;
+        feeling = parsedBody.faces[0].emotion.value;
+        gender = parsedBody.faces[0].gender.value;
+        age = parsedBody.faces[0].age.value.match('/(\d{1,2})(-(\d{1,2}))?/')[1];
 
       }else{  //맥주사진 올린 경우
         //custom vison (맥주 브랜드 인식 -> 병맛, )
