@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const pool = require('../config/db_pool.js');
+const pool = require('../config/db-pool.js');
 const aws = require('aws-sdk');
 //aws.config.loadFromPath('../../config/aws_config.json');
 const s3 = new aws.S3();
